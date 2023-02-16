@@ -46,6 +46,10 @@ Through relevant Bayesian modelling which uncovers influential covariates in our
 <a name="model"/>
 
 ## Model 
+We consider a Cox generalized linear model with link function given by the exponential to model the intensity surface which drives landslide occurences in each grid cell, $s_{i}\in D\subset \mathbb{R}^{2}$. Essentially this intensity surfce takes into account underlying geospatial covariates along with assumed noise given by measurement errors and influences due to spatial proximity, and maps them to a scalar denoting the rate of landslide occurences in the given cell. 
+
+We assume an exponential covariance function, $\rho$, though one can certainly consider a CAR formulation in which the sparsity of the proximity matrix allows for faster computations at higher levels of grid refinement. 
+
 $$\begin{align*}Y(s_{i}) | \lambda &\sim Po(\lambda(s_{i}))\\\\\\
 \log \lambda(s_{i}) | \beta, w, \epsilon &= X(s_{i})\beta + w(s_{i}) + \epsilon(s_{i})\\\\\\
 \beta | \nu &\sim \mathcal{N}(\textbf{0}, \nu^{2} I_{k+1})\\\\\\
@@ -56,5 +60,8 @@ $$\begin{align*}Y(s_{i}) | \lambda &\sim Po(\lambda(s_{i}))\\\\\\
 \sigma^{2} &\sim \mathcal{HC}(0,1)\\\\\\
 \phi &\sim inv-gamma(4,1)\end{align*}$$
 
+Data used to train the model consists of aggregated landslide counts in the grid cells defining hong kong.  These labels - and the underlying features - are highly subjective to the hyperparameter which controls the grid refinement.  To choose grid dimensions which provide an adequate trade-off between covariate inhomogeneity and cell granularity we plot elbow curves of the within sum of squares for covariates in the cells and make an informed choice. 
+
+PICTURES OF THE GRIDS, ALSO OF THE ELBOW
 
 
