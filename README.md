@@ -1,8 +1,7 @@
 # HongKongLandslides
 
 <p align="center">
-    <img src="./media/pcna.png" height="350" alt="pcna_nate"/>
-    <img src="./media/reg1a.png" height="350" alt="reg1a_luca"/>
+    <img src="./media/ggplot_pattern_boundaries.jpeg" height="350" alt="chris_plot"/>
 </p>
 
 |**Languages** | **Libraries** |
@@ -62,6 +61,15 @@ $$\begin{align*}Y(s_{i}) | \lambda &\sim Po(\lambda(s_{i}))\\\\\\
 
 Data used to train the model consists of aggregated landslide counts in the grid cells defining hong kong.  These labels - and the underlying features - are highly subjective to the hyperparameter which controls the grid refinement.  To choose grid dimensions which provide an adequate trade-off between covariate inhomogeneity and cell granularity we plot elbow curves of the within sum of squares for covariates in the cells and make an informed choice. 
 
-PICTURES OF THE GRIDS, ALSO OF THE ELBOW
+<p align="center">
+    <img src="./media/grid_10.png" height="250" alt="grid10"/>
+    <img src="./media/grid_20.png" height="250" alt="grid20"/>
+</p>
+
+<p align="center">
+    <img src="./media/elbow.png" height="400" alt="elbow"/>
+</p>
+
+
 
 
