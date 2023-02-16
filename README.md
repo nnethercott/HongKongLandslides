@@ -45,7 +45,7 @@ Through relevant Bayesian modelling which uncovers influential covariates in our
 <a name="model"/>
 
 ## Model 
-We consider a Cox generalized linear model with link function given by the exponential to model the intensity surface which drives landslide occurences in each grid cell, $s_{i}\in D\subset \mathbb{R}^{2}$. Essentially this intensity surfce takes into account underlying geospatial covariates along with assumed noise given by measurement errors and influences due to spatial proximity, and maps them to a scalar denoting the rate of landslide occurences in the given cell. 
+We consider a Cox generalized linear model with link function given by the exponential to model the intensity surface which drives landslide occurences, $Y(s_{i})$, in each grid cell, $s_{i}\in D\subset \mathbb{R}^{2}$. Essentially this intensity surfce takes into account underlying geospatial covariates along with assumed noise given by measurement errors and influences due to spatial proximity, and maps them to a scalar denoting the rate of landslide occurences in the given cell. 
 
 We assume an exponential covariance function, $\rho$, though one can certainly consider a CAR formulation in which the sparsity of the proximity matrix allows for faster computations at higher levels of grid refinement. 
 
