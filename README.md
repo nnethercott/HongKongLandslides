@@ -1,7 +1,7 @@
 # HongKongLandslides
 
 <p align="center">
-    <img src="./media/ggplot_pattern_boundaries.jpeg" height="350" alt="chris_plot"/>
+    <img src="./media/ggplot_pattern_boundaries.jpeg" height="300" alt="chris_plot"/>
 </p>
 
 |**Languages** | **Libraries** |
@@ -26,7 +26,7 @@ Through relevant Bayesian modelling which uncovers influential covariates in our
 
 <a name="dataset"/>
 
-## The Dataset
+## Dataset
 
 |**Covariate** | **Description** |
 | -----| ---- |
@@ -59,7 +59,7 @@ $$\begin{align*}Y(s_{i}) | \lambda &\sim Po(\lambda(s_{i}))\\\\\\
 \sigma^{2} &\sim \mathcal{HC}(0,1)\\\\\\
 \phi &\sim inv-gamma(4,1)\end{align*}$$
 
-Data used to train the model consists of aggregated landslide counts in the grid cells defining hong kong.  These labels - and the underlying features - are highly subjective to the hyperparameter which controls the grid refinement.  To choose grid dimensions which provide an adequate trade-off between covariate inhomogeneity and cell granularity we plot elbow curves of the within sum of squares for covariates in the cells and make an informed choice. 
+Data used to train the model consists of aggregated landslide counts in the grid cells defining Hong Kong.  These labels - and the underlying features - are highly subjective to the hyperparameter which controls the grid refinement.  To choose grid dimensions which provide an adequate trade-off between covariate inhomogeneity and cell granularity we plot elbow curves of the within sum of squares for covariates in the cells and make an informed choice. 
 
 <p align="center">
     <img src="./media/grid_10.png" height="250" alt="grid10"/>
@@ -71,5 +71,22 @@ Data used to train the model consists of aggregated landslide counts in the grid
 </p>
 
 
+<a name="results"/>
 
+## Results 
+To fit the model outlined above we use landslide data collected from years 2016 through 2018, and reserve 2019 records for a predictive phase. Standardization is carried out on the numerical features, with the associated normalization parameters saved for use on the test data, and categorical variables are amalgamated to binary indications. A grid size of 21x30 cells is used, with one grid cell corresponding to areal units of roughly 2kmx2km. 
 
+As a prelimnary step, a mask is generated from a supplementary shapefile of the Hong Kong geography in order to ensure only samples belonging within the country's borders are included in the fitting. 
+
+<p align="center">
+<img src="./media/mask_95.jpg" height="300" alt="mask"/>
+</p>
+
+The Bayesian model is fit using `rstan` within R and the posterior chains were generated.  From the posterior distributions of the model parameters we see that the only influential regressors in determining landslide propensity are the binary indicators for previously recorded erosion and lack of vegetation. 
+
+<p align="center">
+<img src="./media/beta_chain.png" height="250" alt="beta"/>
+<img src="./media/hyperparam_chain.png" height="250" alt="noise"/>
+</p>
+
+Using now the multivariate normal updates at the log scale for the intensity surface conditional on observations in the training set, we can numerically evaluate the posterior predictive density with basic Monte Carlo methods.  
